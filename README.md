@@ -21,34 +21,19 @@
 - [Project Structure](#project-structure)
 - [Prerequisites](#prerequisites)
 - [Building the Swarm Cluster](#building-the-swarm-cluster)
-  - [Step 1 — Initialize the Manager Node](#step-1--initialize-the-manager-node)
-  - [Step 2 — Retrieve the Worker Join Token](#step-2--retrieve-the-worker-join-token)
-  - [Step 3 — Join the Worker Nodes](#step-3--join-the-worker-nodes)
-  - [Step 4 — Verify the Cluster](#step-4--verify-the-cluster)
+  - [Step 1 - Initialize the Manager Node](#step-1---initialize-the-manager-node)
+  - [Step 2 - Retrieve the Worker Join Token](#step-2---retrieve-the-worker-join-token)
+  - [Step 3 - Join the Worker Nodes](#step-3---join-the-worker-nodes)
+  - [Step 4 - Verify the Cluster](#step-4---verify-the-cluster)
 - [Docker Swarm Visualizer](#docker-swarm-visualizer)
-  - [Deploy the Visualizer](#deploy-the-visualizer)
 - [Creating the Overlay Network](#creating-the-overlay-network)
-  - [Create the Overlay Network](#create-the-overlay-network)
 - [Deploying the Hello Service](#deploying-the-hello-service)
-  - [Create the Service](#create-the-service)
-  - [Inspect the Service Definition](#inspect-the-service-definition)
 - [Docker Swarm Routing Mesh](#docker-swarm-routing-mesh)
-  - [How Routing Mesh Works](#how-routing-mesh-works)
-  - [Demonstrating the Routing Mesh](#demonstrating-the-routing-mesh)
 - [High Availability](#high-availability)
-  - [Drain the Ubuntu Worker](#drain-the-ubuntu-worker)
-  - [Restore the Node](#restore-the-node)
 - [Scaling the Service](#scaling-the-service)
-  - [Increase the Number of Replicas](#increase-the-number-of-replicas)
-  - [Reduce the Number of Replicas](#reduce-the-number-of-replicas)
 - [Rolling Updates](#rolling-updates)
-  - [Perform a Rolling Update](#perform-a-rolling-update)
 - [Rollback](#rollback)
-  - [Roll Back the Previous Update](#roll-back-the-previous-update)
 - [Deploying with Docker Stack](#deploying-with-docker-stack)
-  - [Remove the Existing Service](#remove-the-existing-service)
-  - [Review the Stack File](#review-the-stack-configuration)
-  - [Deploy the Stack](#deploy-the-stack)
 - [Troubleshooting](#troubleshooting)
 - [Cleanup](#cleanup)
 - [Key Takeaways](#key-takeaways)
@@ -302,7 +287,7 @@ This prevents temporary files, editor settings, and other unnecessary artifacts 
 
 ---
 
-### `LICENSE`
+### LICENSE File
 
 Defines the licensing terms for the repository.
 
@@ -403,7 +388,7 @@ The process consists of four steps:
 
 Once completed, the three virtual machines will operate as a single Docker Swarm cluster capable of scheduling and managing containerized workloads.
 
-## Step 1 — Initialize the Manager Node
+## Step 1 - Initialize the Manager Node
 
 The first step is to initialize Docker Swarm on the manager node.
 
@@ -493,7 +478,7 @@ Without a manager node, Docker Swarm cannot coordinate workloads across multiple
 
 ---
 
-## Step 2 — Retrieve the Worker Join Token
+## Step 2 - Retrieve the Worker Join Token
 
 If you no longer have the output from `docker swarm init`, you can retrieve the worker join token at any time.
 
@@ -528,7 +513,7 @@ Copy this command, as it will be executed on both worker nodes in the next step.
 
 ---
 
-## Step 3 — Join the Worker Nodes
+## Step 3 - Join the Worker Nodes
 
 Execute the worker join command on both **ubuntu** and **Rocky**.
 
@@ -590,7 +575,7 @@ Repeat the same procedure on the second worker node.
 
 ---
 
-## Step 4 — Verify the Cluster
+## Step 4 - Verify the Cluster
 
 Return to the **fedora** manager node and list all Swarm members.
 
@@ -848,28 +833,6 @@ From this point forward, the Visualizer will be used throughout the project to i
 - service scaling
 - rolling updates
 - rollback
-
----
-
-## Troubleshooting
-
-### The Visualizer service is repeatedly rejected
-
-If `docker service ps visualizer` shows repeated task failures such as:
-
-```text
-No such image: dockersamples/visualizer:latest
-```
-
-the requested image tag may no longer be available.
-
-Pull the supported image manually:
-
-```bash
-docker pull dockersamples/visualizer:stable
-```
-
-Then recreate the service using the `stable` tag.
 
 ---
 
@@ -1654,7 +1617,7 @@ docker service ls
 
 Only the Visualizer service should remain.
 
-## Stack Configuration
+## Review the Stack File
 
 The stack definition is located in:
 
