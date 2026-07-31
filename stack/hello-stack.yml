@@ -1,0 +1,20 @@
+services:
+
+  hello:
+    
+    image: nginxdemos/hello
+
+    ports:
+      - "80:80"
+
+    deploy:
+      replicas: 3
+
+    networks:
+      - swarm-net
+
+
+networks:
+  
+  swarm-net:
+    external: true
