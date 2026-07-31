@@ -1,0 +1,27 @@
+Before
+
+fedora     ubuntu      Rocky
+  ●          ●           ●
+
+3 Replicas
+
+
+Drain Ubuntu
+
+fedora     ubuntu      Rocky
+  ●          X           ●
+
+
+Docker Swarm
+
+↓
+
+Reschedules Replica
+
+
+After
+
+fedora     ubuntu      Rocky
+ ●●         Drain        ●
+
+Still 3 Replicas

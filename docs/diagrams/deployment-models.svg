@@ -1,0 +1,27 @@
+Imperative
+
+docker service create
+docker service scale
+docker service update
+docker service rollback
+
+            │
+            ▼
+
+     Docker Swarm
+
+
+────────────────────────────────
+
+
+Declarative
+
+hello-stack.yml
+
+            │
+
+docker stack deploy
+
+            ▼
+
+     Docker Swarm

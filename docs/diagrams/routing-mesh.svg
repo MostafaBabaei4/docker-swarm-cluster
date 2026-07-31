@@ -1,0 +1,14 @@
+                 Client Browser
+                       │
+         Request to Any Swarm Node
+                       │
+      ┌────────────────┼────────────────┐
+      │                │                │
+      ▼                ▼                ▼
+  fedora           ubuntu          Rocky
+      │                │                │
+      └────────────────┼────────────────┘
+                       │
+              Docker Routing Mesh
+                       │
+          Selected Hello Replica
