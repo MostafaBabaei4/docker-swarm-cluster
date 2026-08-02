@@ -68,29 +68,7 @@ Rather than focusing only on individual Docker commands, this repository emphasi
 
 # Architecture
 
-
-                           Client Browser
-                                 │
-                                 │
-                        HTTP Requests (Port 80)
-                                 │
-                    Docker Swarm Routing Mesh
-                                 │
-        ┌────────────────────────┼────────────────────────┐
-        │                        │                        │
-        │                        │                        │
-┌────────────────┐      ┌────────────────┐      ┌────────────────┐
-│     fedora     │      │     ubuntu     │      │     Rocky      │
-│────────────────│      │────────────────│      │────────────────│
-│    Manager     │      │    Worker      │      │    Worker      │
-│                │      │                │      │                │
-│ Hello Replica  │      │ Hello Replica  │      │ Hello Replica  │
-│ Visualizer     │      │                │      │                │
-└────────────────┘      └────────────────┘      └────────────────┘
-        │                        │                        │
-        └────────────────────────┼────────────────────────┘
-                                 │
-                         Overlay Network
+![Docker Swarm cluster architecture with one manager node, two worker nodes, an overlay network, and a replicated Hello service](docs/diagrams/swarm-architecture.svg)
 
 
 ---
@@ -196,8 +174,7 @@ docker swarm join \
 The generated token allows worker nodes to securely join the cluster.
 
 > 📸 **Screenshot 1**  
-> Swarm initialized on the manager node.
-
+![Docker Swarm cluster successfully initialized with one manager and two worker nodes](docs/screenshots/01-swarm-cluster.png)
 ---
 
 ## Step 2 - Retrieve the Worker Join Token
@@ -316,8 +293,7 @@ http://<manager-ip>:8080
 The Docker Swarm Visualizer should display the three-node cluster.
 
 > 📸 **Screenshot 2**  
-> Docker Swarm Visualizer showing the cluster.
-
+![Docker Swarm Visualizer displaying the three-node cluster](docs/screenshots/02-visualizer.png)
 ---
 
 ## Troubleshooting
@@ -463,7 +439,7 @@ The Hello application should be displayed.
 Refresh the page several times to observe changes in the reported container hostname when different replicas handle the request.
 
 > 📸 **Screenshot 3**  
-> Hello application visible in the visualizer.
+![Hello service running with three replicas in the Docker Swarm Visualizer](docs/screenshots/03-hello-service.png)
 
 ---
 
@@ -473,22 +449,7 @@ When a service publishes a port, Docker Swarm exposes that port on **every node*
 
 Requests can be sent to any node, and Docker Swarm automatically forwards the traffic to an available service replica.
 
-
-                 Client Browser
-                       │
-         Request to Any Swarm Node
-                       │
-      ┌────────────────┼────────────────┐
-      │                │                │
-      ▼                ▼                ▼
-  fedora           ubuntu          Rocky
-      │                │                │
-      └────────────────┼────────────────┘
-                       │
-              Docker Routing Mesh
-                       │
-          Selected Hello Replica
-
+![Docker Swarm Routing Mesh forwarding client requests from any cluster node to an available Hello service replica](docs/diagrams/routing-mesh.svg)
 
 ---
 
@@ -509,7 +470,7 @@ Although requests enter through different machines, Docker Swarm routes them tra
 Refresh each page several times while observing the Visualizer.
 
 > 📸 **Screenshot 4**  
-> Browser and Visualizer demonstrating the Routing Mesh.
+![Browser accessing the Hello application while the Docker Swarm Visualizer demonstrates the Routing Mesh](docs/screenshots/04-routing-mesh.png)
 
 ---
 
@@ -586,10 +547,10 @@ http://<Rocky-ip>
 Although Rocky is no longer running a service replica, the application remains accessible through Docker Swarm's Routing Mesh.
 
 > 📸 **Screenshot 5**  
-> Browser and Visualizer before draining the Ubuntu worker.
+![Hello service before draining the Ubuntu worker node, showing the initial replica placement](docs/screenshots/05-before-drain.png)
 
 > 📸 **Screenshot 6**  
-> Browser and Visualizer after draining the Ubuntu worker.
+![Hello service after draining the Ubuntu worker node, showing automatic task rescheduling in the Docker Swarm Visualizer](docs/screenshots/06-after-drain.png)
 
 ---
 
@@ -658,7 +619,7 @@ docker service ps hello
 Refresh the Docker Swarm Visualizer to observe the updated replica distribution.
 
 > 📸 **Screenshot 7**  
-> Hello service scaled to five replicas.
+![Docker Swarm Visualizer showing the Hello service scaled from three to five replicas](docs/screenshots/07-service-scaling.png)
 
 ---
 
@@ -724,7 +685,7 @@ As the update progresses, old tasks are replaced with new ones until every repli
 Refresh the Docker Swarm Visualizer to observe the rolling update.
 
 > 📸 **Screenshot 8**  
-> Rolling update in progress.
+![Rolling update in progress with Docker Swarm gradually replacing Hello service replicas](docs/screenshots/08-rolling-update.png)
 
 ---
 
@@ -769,7 +730,7 @@ hello     replicated   3/3
 Refresh the Docker Swarm Visualizer to observe the rollback.
 
 > 📸 **Screenshot 9**  
-> Service rollback.
+![Docker Swarm rolling back the Hello service to the previous deployment](docs/screenshots/09-service-rollback.png)
 
 ---
 
@@ -862,8 +823,7 @@ The Hello service should once again be running with three replicas.
 Refresh the Docker Swarm Visualizer to verify the deployment.
 
 > 📸 **Screenshot 10**  
-> Hello service deployed using Docker Stack.
-
+![Hello service deployed using Docker Stack and displayed in the Docker Swarm Visualizer](docs/screenshots/10-docker-stack.png)
 ---
 
 # Troubleshooting
